@@ -35,6 +35,7 @@ export interface Client {
   legalName: string;
   contact: string;
   representative: string;
+  contactRole?: string;
   email: string;
   phone: string;
   siret: string;
