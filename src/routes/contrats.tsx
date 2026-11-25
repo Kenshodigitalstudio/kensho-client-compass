@@ -1,0 +1,15 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { AppShell } from "@/components/crm/AppShell";
+
+export const Route = createFileRoute("/contrats")({
+  head: () => ({ meta: [{ title: "Espace Contrats — Kenshō Studio CRM" }, { name: "description", content: "Espace Contrats du CRM Kenshō Studio." }, { property: "og:title", content: "Espace Contrats — Kenshō Studio CRM" }, { property: "og:description", content: "Espace Contrats du CRM Kenshō Studio." }] }),
+  component: Page,
+});
+
+function Page() {
+  return (
+    <AppShell title="Espace Contrats">
+      <div className="px-4 py-10 text-[13px] text-muted-foreground sm:px-8">Cette page est en cours de construction.</div>
+    </AppShell>
+  );
+}

@@ -1,23 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { AppShell } from "@/components/crm/AppShell";
 
-// The home route ships no og:image, so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({ meta: [{ title: "Tableau de bord CRM — Kenshō Studio CRM" }, { name: "description", content: "Tableau de bord CRM du CRM Kenshō Studio." }, { property: "og:title", content: "Tableau de bord CRM — Kenshō Studio CRM" }, { property: "og:description", content: "Tableau de bord CRM du CRM Kenshō Studio." }] }),
+  component: Page,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Page() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <AppShell title="Tableau de bord CRM">
+      <div className="px-4 py-10 text-[13px] text-muted-foreground sm:px-8">Cette page est en cours de construction.</div>
+    </AppShell>
   );
 }
