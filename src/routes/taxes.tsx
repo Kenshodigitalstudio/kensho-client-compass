@@ -3,21 +3,24 @@ import { useState } from "react";
 import { AppShell } from "@/components/crm/AppShell";
 import { useCrm } from "@/lib/crm/store";
 import { Panel, SectionTitle, Field, TextInput, SelectInput } from "@/components/crm/kit";
-import { eur, formatRate } from "@/lib/crm/format";
-import { computeTaxes } from "@/lib/crm/tax";
+import { eur } from "@/lib/crm/format";
+import { computeTaxes, formatRate } from "@/lib/crm/tax";
+import { crmHead } from "@/lib/crm/page-head";
 import type { Regime } from "@/lib/crm/types";
 
 export const Route = createFileRoute("/taxes")({
+  head: () => crmHead("Taxes & Bénéfices", "Estimation des cotisations, impôts et bénéfices de Kenshō Studio."),
   component: TaxesPage,
 });
 
 function TaxesPage() {
   const { data } = useCrm();
 
-  const [regime, setRegime] = useState<Regime>(data?.settings.regime ?? "micro");
+  const [regimeOverride, setRegime] = useState<Regime | null>(null);
   const [simulationCa, setSimulationCa] = useState(6000);
 
   if (!data) return <AppShell title="Taxes & Bénéfices"><div className="p-8 text-center text-muted-foreground">Chargement…</div></AppShell>;
+  const regime = regimeOverride ?? data.settings.regime;
 
   // CA mensuel actuel issu des honoraires des clients actifs
   const activeClients = data.clients.filter((c) => c.status === "actif" || c.status === "onboarding");
@@ -42,12 +45,12 @@ function TaxesPage() {
                 Calcul prévisionnel des cotisations sociales, taxes et bénéfices nets disponibles.
               </p>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <span className="text-xs font-medium text-muted-foreground">Régime fiscal :</span>
               <SelectInput
                 value={regime}
                 onChange={(e) => setRegime(e.target.value as Regime)}
-                className="w-56 text-xs"
+                  className="max-w-full sm:w-56 text-xs"
               >
                 <option value="micro">Micro-entreprise (BNC / Services)</option>
                 <option value="sasu">Société (SASU / EURL avec IS)</option>

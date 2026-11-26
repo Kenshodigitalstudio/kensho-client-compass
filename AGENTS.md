@@ -28,3 +28,6 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- Keep CRM page metadata in the browser-safe `crmHead` helper so every content route has distinct, complete social metadata.
+- Edit templates and settings through the existing CRM provider, with explicit save and cancel actions, to preserve the current data format and client-page integration.

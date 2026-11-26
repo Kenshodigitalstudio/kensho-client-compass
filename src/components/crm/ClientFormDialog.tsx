@@ -13,7 +13,7 @@ const SERVICES = [
   "Gestion mensuelle Google Ads",
   "Audit Google Ads – Consultation stratégique (1h)",
   "Gestion des réseaux sociaux (2027)",
-];
+] as const;
 
 export function ClientFormDialog({
   open,

@@ -4,14 +4,10 @@ import { useCrm, matchesFilter } from "@/lib/crm/store";
 import { Panel, SectionTitle, Btn, Avatar, StatusBadge, EmptyState } from "@/components/crm/kit";
 import { eur, initials, shortSlot, frDate } from "@/lib/crm/format";
 import { totalBudget, mailtoHref } from "@/lib/crm/templates";
+import { crmHead } from "@/lib/crm/page-head";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Tableau de bord — Kenshō Studio CRM" },
-      { name: "description", content: "Tableau de bord Kenshō Studio CRM." },
-    ],
-  }),
+  head: () => crmHead("Tableau de bord", "Clients, budgets publicitaires, rendez-vous et relances Kenshō Studio."),
   component: DashboardPage,
 });
 

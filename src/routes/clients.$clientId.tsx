@@ -6,8 +6,10 @@ import { Panel, SectionTitle, Btn, Avatar, StatusBadge, Field, TextInput, TextAr
 import { eur, initials, frDate, shortSlot, CAMPAIGNS } from "@/lib/crm/format";
 import { totalBudget, fillTemplate, mailtoHref } from "@/lib/crm/templates";
 import type { CampaignType, ClientStatus } from "@/lib/crm/types";
+import { crmHead } from "@/lib/crm/page-head";
 
 export const Route = createFileRoute("/clients/$clientId")({
+  head: ({ params }) => crmHead(`Fiche client ${params.clientId}`, "Budgets, notes, contrat et emails personnalisés du client Kenshō Studio."),
   component: ClientDetailPage,
 });
 
@@ -58,7 +60,7 @@ function ClientDetailPage() {
     const nextStatus = client.contract.status === "signe" ? "a_signer" : "signe";
     updateClient(client.id, (c) => ({
       ...c,
-      contract: c.contract ? { ...c.contract, status: nextStatus, signedAt: nextStatus === "signe" ? new Date().toISOString() : undefined } : null,
+      contract: c.contract ? { ...c.contract, status: nextStatus, signedAt: nextStatus === "signe" ? new Date().toISOString() : "" } : null,
     }));
   };
 

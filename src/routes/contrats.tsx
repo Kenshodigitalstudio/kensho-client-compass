@@ -6,24 +6,28 @@ import { Panel, SectionTitle, Btn, Field, TextInput, SelectInput } from "@/compo
 import { CONTRACT_TEMPLATES } from "@/lib/crm/contracts";
 import { eur, frDate } from "@/lib/crm/format";
 import { totalBudget } from "@/lib/crm/templates";
+import { crmHead } from "@/lib/crm/page-head";
 
 export const Route = createFileRoute("/contrats")({
+  head: () => crmHead("Contrats", "Création et impression des contrats de prestation Kenshō Studio."),
   component: ContratsPage,
 });
 
 function ContratsPage() {
   const { data, updateClient } = useCrm();
 
-  const [selectedTemplateId, setSelectedTemplateId] = useState(CONTRACT_TEMPLATES[0].id);
+  const [selectedTemplateId, setSelectedTemplateId] = useState(CONTRACT_TEMPLATES[0]?.id ?? "");
   const [selectedClientId, setSelectedClientId] = useState(data?.clients[0]?.id ?? "");
   const [startDate, setStartDate] = useState(new Date().toISOString().slice(0, 10));
-  const [fee, setFee] = useState(1200);
+  const [feeOverride, setFee] = useState<number | null>(null);
   const [assigned, setAssigned] = useState(false);
 
   if (!data) return <AppShell title="Contrats"><div className="p-8 text-center text-muted-foreground">Chargement…</div></AppShell>;
 
   const template = CONTRACT_TEMPLATES.find((t) => t.id === selectedTemplateId) ?? CONTRACT_TEMPLATES[0];
   const client = data.clients.find((c) => c.id === selectedClientId) ?? data.clients[0];
+  if (!template) return <AppShell title="Contrats"><p className="p-8">Aucun modèle de contrat disponible.</p></AppShell>;
+  const fee = feeOverride ?? client?.contract?.fee ?? client?.fee ?? template.fee;
 
   const handleSelectClient = (id: string) => {
     setSelectedClientId(id);
@@ -87,7 +91,7 @@ function ContratsPage() {
           </Field>
 
           <div className="pt-2 space-y-2">
-            <Btn variant="primary" className="w-full text-xs" onClick={handleAssignToClient}>
+            <Btn variant="primary" className="w-full text-xs" disabled={!client || !startDate || !Number.isFinite(fee) || fee < 0} onClick={handleAssignToClient}>
               {assigned ? "✓ Contrat associé au client !" : "Associer ce contrat au client"}
             </Btn>
             <Btn variant="secondary" className="w-full text-xs" onClick={() => window.print()}>
@@ -97,7 +101,7 @@ function ContratsPage() {
         </Panel>
 
         {/* Aperçu du document */}
-        <Panel className="p-8 lg:col-span-2 bg-card text-foreground print:border-none print:shadow-none">
+        <div id="contract-print" className="min-w-0 lg:col-span-2"><Panel className="p-4 sm:p-8 bg-card text-foreground print:border-none print:shadow-none">
           <div className="border-b border-border pb-6">
             <div className="flex justify-between items-start">
               <div>
@@ -148,7 +152,7 @@ function ContratsPage() {
             <div className="mt-10 grid grid-cols-2 gap-8 border-t border-border pt-6 text-xs">
               <div className="h-24">
                 <p className="font-semibold">Pour Kenshō Digital Studio :</p>
-                <p className="mt-8 text-muted-foreground italic">Signé électroniquement</p>
+                <p className="mt-8 text-muted-foreground italic">Signature du prestataire</p>
               </div>
               <div className="h-24">
                 <p className="font-semibold">Pour le Client ({client?.name}) :</p>
@@ -156,7 +160,7 @@ function ContratsPage() {
               </div>
             </div>
           </div>
-        </Panel>
+        </Panel></div>
       </div>
     </AppShell>
   );
