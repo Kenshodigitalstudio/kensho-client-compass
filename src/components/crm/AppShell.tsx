@@ -93,7 +93,7 @@ function FilterPills() {
   );
 }
 
-export function AppShell({ title, children }: { title: string; children: ReactNode }) {
+export function AppShell({ title, children, daily = false }: { title: string; children: ReactNode; daily?: boolean }) {
   const { newClientOpen, setNewClientOpen } = useCrm();
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
@@ -104,7 +104,7 @@ export function AppShell({ title, children }: { title: string; children: ReactNo
           </Link>
           <h1 className="min-w-0 flex-1 truncate text-[15px] font-semibold xl:w-auto xl:max-w-[210px] xl:flex-none xl:whitespace-normal xl:leading-tight">{title}</h1>
           <div className="hidden xl:block"><SearchBox /></div>
-          <div className="hidden xl:block"><FilterPills /></div>
+          {!daily && <div className="hidden xl:block"><FilterPills /></div>}
           <nav className="ml-auto flex items-center gap-5 text-[13px] text-muted-foreground">
             <Link to="/templates" className="hidden leading-tight hover:text-foreground 2xl:block" activeProps={{ className: "text-foreground" }}>Templates d'emails</Link>
             <Link to="/taxes" className="hidden leading-tight hover:text-foreground 2xl:block" activeProps={{ className: "text-foreground" }}>Taxes &amp; Bénéfices</Link>
@@ -116,7 +116,7 @@ export function AppShell({ title, children }: { title: string; children: ReactNo
         </div>
         <div className="flex items-center gap-3 px-4 pb-3 sm:px-8 xl:hidden">
           <SearchBox />
-          <div className="hidden md:block"><FilterPills /></div>
+          {!daily && <div className="hidden md:block"><FilterPills /></div>}
         </div>
         <nav className="flex h-12 items-center gap-1 overflow-x-auto border-t border-border px-4 text-[13px] font-medium sm:px-8" aria-label="Navigation principale">
           {TABS.map((t) => (
