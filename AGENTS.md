@@ -31,3 +31,5 @@ use the editor.
 
 - Keep CRM page metadata in the browser-safe `crmHead` helper so every content route has distinct, complete social metadata.
 - Edit templates and settings through the existing CRM provider, with explicit save and cancel actions, to preserve the current data format and client-page integration.
+- Store daily workspace tasks and memo in an optional workspace field through the existing CRM provider; optionality preserves previously saved client data.
+- Compute daily agenda and due-email selection in the browser-safe daily helper using Europe/Paris dates so the workday is consistent at midnight.

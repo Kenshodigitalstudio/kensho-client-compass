@@ -76,6 +76,7 @@ export interface Settings {
 }
 
 export interface CrmData {
+  workspace?: { tasks: (Task & { due: string })[]; memo: string };
   clients: Client[];
   templates: EmailTemplate[];
   finances: MonthFinance[];
