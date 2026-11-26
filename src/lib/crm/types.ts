@@ -1,18 +1,36 @@
+
 export type ClientStatus = "actif" | "onboarding" | "pause" | "audit" | "prospect";
 export type CampaignType = "search" | "pmax" | "shopping" | "display" | "demandgen" | "remarketing";
 export type ContractStatus = "a_signer" | "signe";
 
-export interface Note { id: string; date: string; text: string }
+export interface Note {
+  id: string;
+  date: string;
+  text: string;
+}
+
 export interface Appointment {
   id: string;
-  date: string; // ISO datetime
+  date: string;
   title: string;
   place: string;
   link?: string;
   done?: boolean;
 }
-export interface Task { id: string; text: string; done: boolean }
-export interface PendingEmail { id: string; templateId: string; title: string; due: string; sent: boolean }
+
+export interface Task {
+  id: string;
+  text: string;
+  done: boolean;
+}
+
+export interface PendingEmail {
+  id: string;
+  templateId: string;
+  title: string;
+  due: string;
+  sent: boolean;
+}
 
 export interface Contract {
   id: string;
@@ -41,12 +59,16 @@ export interface Client {
   siret: string;
   address: string;
   website: string;
-  links: { ads: string; looker: string; drive: string };
+  links: {
+    ads: string;
+    looker: string;
+    drive: string;
+  };
   status: ClientStatus;
   formule: string;
   channel: "google" | "social";
   budgets: Record<CampaignType, number>;
-  fee: number; // honoraires HT / mois
+  fee: number;
   contract: Contract | null;
   notes: Note[];
   appointments: Appointment[];
@@ -55,9 +77,21 @@ export interface Client {
   createdAt: string;
 }
 
-export interface EmailTemplate { id: string; name: string; subject: string; body: string }
+export interface EmailTemplate {
+  id: string;
+  name: string;
+  subject: string;
+  body: string;
+  html?: string;
+}
 
-export interface MonthFinance { month: number; year: number; ca: number; frais: number; declared: boolean }
+export interface MonthFinance {
+  month: number;
+  year: number;
+  ca: number;
+  frais: number;
+  declared: boolean;
+}
 
 export type Regime = "micro" | "sasu";
 
@@ -67,7 +101,7 @@ export interface Settings {
   agencyEmail: string;
   agencyAddress: string;
   agencySiret: string;
-  urssafRate: number; // %
+  urssafRate: number;
   cfpRate: number;
   vlRate: number;
   isRate: number;
@@ -76,7 +110,10 @@ export interface Settings {
 }
 
 export interface CrmData {
-  workspace?: { tasks: (Task & { due: string })[]; memo: string };
+  workspace?: {
+    tasks: (Task & { due: string })[];
+    memo: string;
+  };
   clients: Client[];
   templates: EmailTemplate[];
   finances: MonthFinance[];
