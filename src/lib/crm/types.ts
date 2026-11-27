@@ -45,6 +45,46 @@ export interface Contract {
   payment: string;
   prestation: string;
   createdAt: string;
+  docStatus?: ContractDocStatus;
+  endDate?: string;
+  autoRenew?: boolean;
+}
+
+export type ContractDocStatus = "brouillon" | "attente" | "signe" | "expire";
+export type InvoiceState = "payee" | "attente" | "retard";
+export type ActionPriority = "basse" | "moyenne" | "haute";
+export type ActionStatus = "a_faire" | "en_cours" | "termine";
+
+export interface Invoice {
+  id: string;
+  number: string;
+  amount: number;
+  issuedAt: string;
+  dueAt: string;
+  paidAt?: string;
+}
+
+export interface ClientAction {
+  id: string;
+  text: string;
+  due: string;
+  priority: ActionPriority;
+  status: ActionStatus;
+  createdAt: string;
+  doneAt?: string;
+}
+
+export interface HistoryEvent {
+  id: string;
+  date: string;
+  kind: "email" | "budget";
+  text: string;
+}
+
+export interface ContractPdf {
+  name: string;
+  dataUrl: string;
+  uploadedAt: string;
 }
 
 export interface Client {
@@ -75,6 +115,10 @@ export interface Client {
   tasks: Task[];
   emails: PendingEmail[];
   createdAt: string;
+  invoices?: Invoice[];
+  actions?: ClientAction[];
+  history?: HistoryEvent[];
+  contractPdf?: ContractPdf;
 }
 
 export interface EmailTemplate {
