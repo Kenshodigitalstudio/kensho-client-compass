@@ -33,3 +33,4 @@ use the editor.
 - Edit templates and settings through the existing CRM provider, with explicit save and cancel actions, to preserve the current data format and client-page integration.
 - Store daily workspace tasks and memo in an optional workspace field through the existing CRM provider; optionality preserves previously saved client data.
 - Compute daily agenda and due-email selection in the browser-safe daily helper using Europe/Paris dates so the workday is consistent at midnight.
+- Keep client-file rules (contract status, invoice state, timeline) in the browser-safe client-file helper so they stay testable; new client fields stay optional to preserve saved data.

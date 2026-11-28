@@ -208,7 +208,7 @@ function Page() {
                     <Btn
                       type="button"
                       size="sm"
-                      variant={editorMode === "visual" ? "default" : "secondary"}
+                      variant={editorMode === "visual" ? "primary" : "secondary"}
                       onClick={() => setEditorMode("visual")}
                     >
                       <Eye size={14} /> Texte
@@ -216,7 +216,7 @@ function Page() {
                     <Btn
                       type="button"
                       size="sm"
-                      variant={editorMode === "html" ? "default" : "secondary"}
+                      variant={editorMode === "html" ? "primary" : "secondary"}
                       onClick={() => setEditorMode("html")}
                     >
                       <Code2 size={14} /> HTML
@@ -273,7 +273,7 @@ function Page() {
                     <Btn
                       type="button"
                       size="sm"
-                      variant={previewMode === "desktop" ? "default" : "secondary"}
+                      variant={previewMode === "desktop" ? "primary" : "secondary"}
                       onClick={() => setPreviewMode("desktop")}
                     >
                       <Monitor size={14} /> Desktop
@@ -281,7 +281,7 @@ function Page() {
                     <Btn
                       type="button"
                       size="sm"
-                      variant={previewMode === "mobile" ? "default" : "secondary"}
+                      variant={previewMode === "mobile" ? "primary" : "secondary"}
                       onClick={() => setPreviewMode("mobile")}
                     >
                       <Smartphone size={14} /> Mobile

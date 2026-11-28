@@ -94,8 +94,8 @@ function HeaderPanel({ client, update }: P) {
         ...c.contract,
         docStatus: s,
         status: s === "signe" ? "signe" : "a_signer",
-        signedAt: s === "signe" ? (c.contract.signedAt || new Date().toISOString()) : c.contract.signedAt,
-        sentAt: s === "attente" ? (c.contract.sentAt || new Date().toISOString()) : c.contract.sentAt,
+        signedAt: s === "signe" ? (c.contract.signedAt || new Date().toISOString()) : (c.contract.signedAt ?? ""),
+        sentAt: s === "attente" ? (c.contract.sentAt || new Date().toISOString()) : (c.contract.sentAt ?? ""),
       },
     } : c);
 
