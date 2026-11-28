@@ -207,7 +207,7 @@ function Page() {
                   <div className="flex gap-2">
                     <Btn
                       type="button"
-                      size="sm"
+                     
                       variant={editorMode === "visual" ? "primary" : "secondary"}
                       onClick={() => setEditorMode("visual")}
                     >
@@ -215,7 +215,7 @@ function Page() {
                     </Btn>
                     <Btn
                       type="button"
-                      size="sm"
+                     
                       variant={editorMode === "html" ? "primary" : "secondary"}
                       onClick={() => setEditorMode("html")}
                     >
@@ -272,7 +272,7 @@ function Page() {
                   <div className="flex gap-2">
                     <Btn
                       type="button"
-                      size="sm"
+                     
                       variant={previewMode === "desktop" ? "primary" : "secondary"}
                       onClick={() => setPreviewMode("desktop")}
                     >
@@ -280,7 +280,7 @@ function Page() {
                     </Btn>
                     <Btn
                       type="button"
-                      size="sm"
+                     
                       variant={previewMode === "mobile" ? "primary" : "secondary"}
                       onClick={() => setPreviewMode("mobile")}
                     >
